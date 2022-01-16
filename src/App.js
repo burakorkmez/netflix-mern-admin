@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
+import Home from './pages/home/Home';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
 				<Navbar />
 				<div className="container">
 					<Sidebar />
-					<div className="other">other pages</div>
+					<Home />
 				</div>
 			</div>
 		</BrowserRouter>
