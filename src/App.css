@@ -7,3 +7,16 @@
 body {
 	font-family: 'Roboto', sans-serif;
 }
+
+.container {
+	display: flex;
+}
+
+.other {
+	flex: 5;
+}
+
+.link {
+	text-decoration: none;
+	color: inherit;
+}
