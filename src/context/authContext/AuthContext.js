@@ -1,7 +1,8 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const INITIAL_STATE = {
-	user: null,
+	user: JSON.parse(localStorage.getItem('user')) || null,
 	isFetching: false,
 	error: false,
 };
@@ -15,6 +16,8 @@ const AuthReducer = (state, action) => {
 			return { user: action.payload, isFetching: false, error: false };
 		case 'LOGIN_FAILURE':
 			return { user: null, isFetching: false, error: true };
+		case 'LOGOUT':
+			return { user: null, isFetching: false, error: false };
 
 		default:
 			return state;
@@ -23,6 +26,15 @@ const AuthReducer = (state, action) => {
 
 export const AuthContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
+	let history = useHistory();
+
+	useEffect(() => {
+		localStorage.setItem('user', JSON.stringify(state.user));
+
+		// if (!state.user) {
+		// 	history.push('/login');
+		// }
+	}, [state.user, history]);
 
 	return (
 		<AuthContext.Provider value={{ state, dispatch }}>

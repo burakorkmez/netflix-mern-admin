@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './navbar.css';
-import { NotificationsNone, Language, Settings } from '@material-ui/icons';
+import {
+	NotificationsNone,
+	Language,
+	Settings,
+	ExitToApp,
+} from '@material-ui/icons';
+import { AuthContext } from '../../context/authContext/AuthContext';
+import { useHistory } from 'react-router-dom';
 
 export default function Topbar() {
+	const { dispatch } = useContext(AuthContext);
+
+	let history = useHistory();
+
+	const handleLogout = () => {
+		dispatch({ type: 'LOGOUT' });
+		// history.push('/login');
+	};
+
 	return (
 		<div className="topbar">
 			<div className="topbarWrapper">
@@ -26,6 +42,10 @@ export default function Topbar() {
 						alt=""
 						className="topAvatar"
 					/>
+					<button className="logout" onClick={handleLogout}>
+						<ExitToApp />
+						<span>Logout</span>
+					</button>
 				</div>
 			</div>
 		</div>

@@ -55,3 +55,14 @@
 	border-radius: 50%;
 	cursor: pointer;
 }
+.logout {
+	margin-left: 8px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 5px;
+	font-size: 11px;
+	border: 1px solid white;
+	background-color: rgb(251, 251, 255);
+	cursor: pointer;
+}
