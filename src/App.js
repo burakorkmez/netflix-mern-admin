@@ -8,6 +8,7 @@ import User from './pages/user/User';
 import NewUser from './pages/newUser/NewUser';
 import ProductList from './pages/productList/ProductList';
 import Product from './pages/product/Product';
+import NewProduct from './pages/newProduct/NewProduct';
 
 function App() {
 	return (
@@ -33,6 +34,9 @@ function App() {
 					</Route>
 					<Route path="/product/:productId">
 						<Product />
+					</Route>
+					<Route path="/newproduct">
+						<NewProduct />
 					</Route>
 				</Switch>
 			</div>
