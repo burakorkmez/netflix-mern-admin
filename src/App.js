@@ -8,7 +8,7 @@ import User from './pages/user/User';
 import NewUser from './pages/newUser/NewUser';
 import ProductList from './pages/productList/ProductList';
 import Product from './pages/product/Product';
-import NewProduct from './pages/newProduct/NewProduct';
+import NewMovie from './pages/newMovie/NewMovie';
 import Login from './pages/login/Login';
 import { useContext } from 'react';
 import { AuthContext } from './context/authContext/AuthContext';
@@ -54,8 +54,8 @@ function App() {
 							{user && <Product />}
 							{!user && <Redirect to="/login" />}
 						</Route>
-						<Route path="/newproduct">
-							{user && <NewProduct />}
+						<Route path="/newMovie">
+							{user && <NewMovie />}
 							{!user && <Redirect to="/login" />}
 						</Route>
 					</div>

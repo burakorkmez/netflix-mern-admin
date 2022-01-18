@@ -1,7 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
 import './product.css';
-import Chart from '../../components/chart/Chart';
-import { productData } from '../../dummyData';
 import { Publish } from '@material-ui/icons';
 import { useContext, useEffect } from 'react';
 import { getMovie } from '../../context/movieContext/apiCalls';
@@ -17,12 +15,12 @@ export default function Product() {
 	useEffect(() => {
 		getMovie(dispatch, movieId);
 	}, [dispatch, movieId]);
-
+	console.log(movie);
 	return (
 		<div className="product">
 			<div className="productTitleContainer">
 				<h1 className="productTitle">Movie</h1>
-				<Link to="/newproduct">
+				<Link to="/newmovie">
 					<button className="productAddButton">Create</button>
 				</Link>
 			</div>

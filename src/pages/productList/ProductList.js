@@ -2,7 +2,7 @@ import './productList.css';
 import { DataGrid } from '@material-ui/data-grid';
 import { DeleteOutline } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { MovieContext } from '../../context/movieContext/MovieContext';
 import { deleteMovie, getMovies } from '../../context/movieContext/apiCalls';
 
@@ -74,15 +74,15 @@ export default function ProductList() {
 			</div>
 		);
 	}
-
 	return (
 		<div className="productList">
-			{movies && (
+			{movies && Array.isArray(movies) && (
 				<DataGrid
 					rows={movies}
 					disableSelectionOnClick
 					columns={columns}
 					pageSize={8}
+					rowsPerPageOptions={[8]}
 					checkboxSelection
 					getRowId={(r) => r._id}
 				/>
