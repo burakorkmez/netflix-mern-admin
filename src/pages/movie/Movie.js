@@ -1,10 +1,10 @@
 import { Link, useParams } from 'react-router-dom';
-import './product.css';
+import './movie.css';
 import { Publish } from '@material-ui/icons';
 import { useEffect, useState } from 'react';
 import { getMovie } from '../../context/movieContext/apiCalls';
 
-export default function Product() {
+export default function Movie() {
 	const { movieId } = useParams();
 	const [movie, setMovie] = useState(null);
 	const [isFetching, setIsFetching] = useState(false);

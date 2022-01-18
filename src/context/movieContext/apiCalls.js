@@ -61,7 +61,7 @@ export const createMovie = async (dispatch, movie) => {
 export const deleteMovie = async (dispatch, id) => {
 	dispatch(deleteMovieStart());
 	try {
-		const res = await axios.delete('/movies/' + id, {
+		await axios.delete('/movies/' + id, {
 			headers: {
 				token: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken,
 			},

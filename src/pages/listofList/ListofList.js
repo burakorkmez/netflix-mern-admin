@@ -4,7 +4,7 @@ import { DeleteOutline } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import { ListContext } from '../../context/listContext/ListContext';
-import { getLists } from '../../context/listContext/apiCalls';
+import { deleteList, getLists } from '../../context/listContext/apiCalls';
 
 export default function ListOfList() {
 	const {
@@ -12,7 +12,9 @@ export default function ListOfList() {
 		state: { lists },
 	} = useContext(ListContext);
 
-	const handleDelete = (id) => {};
+	const handleDelete = (id) => {
+		deleteList(dispatch, id);
+	};
 
 	useEffect(() => {
 		getLists(dispatch);
@@ -32,9 +34,7 @@ export default function ListOfList() {
 			renderCell: (params) => {
 				return (
 					<>
-						<Link
-							to={{ pathname: '/product/' + params.row._id, movie: params.row }}
-						>
+						<Link to={`/lists/${params.row._id}`}>
 							<button className="productListEdit">Edit</button>
 						</Link>
 						<DeleteOutline

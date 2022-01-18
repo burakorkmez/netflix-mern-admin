@@ -18,6 +18,24 @@ const ListReducer = (state, action) => {
 				isFetching: false,
 				error: true,
 			};
+		case 'DELETLISTIE_START':
+			return {
+				...state,
+				isFetching: true,
+				error: false,
+			};
+		case 'DELETE_LIST_SUCCESS':
+			return {
+				lists: state.lists.filter((list) => list._id !== action.payload),
+				isFetching: false,
+				error: false,
+			};
+		case 'DELETE_LIST_FAILURE':
+			return {
+				...state,
+				isFetching: false,
+				error: true,
+			};
 
 		default:
 			return { ...state };
