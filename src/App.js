@@ -12,6 +12,7 @@ import NewMovie from './pages/newMovie/NewMovie';
 import Login from './pages/login/Login';
 import { useContext } from 'react';
 import { AuthContext } from './context/authContext/AuthContext';
+import ListofList from './pages/listofList/ListofList';
 
 function App() {
 	const {
@@ -56,6 +57,10 @@ function App() {
 						</Route>
 						<Route path="/newMovie">
 							{user && <NewMovie />}
+							{!user && <Redirect to="/login" />}
+						</Route>
+						<Route path="/lists">
+							{user && <ListofList />}
 							{!user && <Redirect to="/login" />}
 						</Route>
 					</div>
