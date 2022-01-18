@@ -1,21 +1,35 @@
 import { Link, useParams } from 'react-router-dom';
 import './product.css';
 import { Publish } from '@material-ui/icons';
-import { useContext, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getMovie } from '../../context/movieContext/apiCalls';
-import { MovieContext } from '../../context/movieContext/MovieContext';
 
 export default function Product() {
-	const {
-		dispatch,
-		state: { movies: movie },
-	} = useContext(MovieContext);
 	const { movieId } = useParams();
+	const [movie, setMovie] = useState(null);
+	const [isFetching, setIsFetching] = useState(false);
 
 	useEffect(() => {
-		getMovie(dispatch, movieId);
-	}, [dispatch, movieId]);
+		setIsFetching(true);
+		(async function () {
+			const res = await getMovie(movieId);
+			setMovie(res);
+			setIsFetching(false);
+		})();
+	}, [movieId]);
 	console.log(movie);
+
+	if (isFetching || !movie) {
+		return (
+			<div className="spinner">
+				<img
+					src="/img/spinner.gif"
+					alt="Loading spinner"
+					className="spinnerImg"
+				/>
+			</div>
+		);
+	}
 	return (
 		<div className="product">
 			<div className="productTitleContainer">

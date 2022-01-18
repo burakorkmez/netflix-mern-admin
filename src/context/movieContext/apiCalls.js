@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+	createMovieFailure,
+	createMovieStart,
+	createMovieSuccess,
 	deleteMovieFailure,
 	deleteMovieStart,
 	deleteMovieSuccess,
@@ -24,17 +27,33 @@ export const getMovies = async (dispatch) => {
 };
 
 // GET a single movie
-export const getMovie = async (dispatch, id) => {
-	dispatch(getMoviesStart());
+export const getMovie = async (id) => {
+	// dispatch(getMoviesStart());
 	try {
 		const res = await axios.get('/movies/find/' + id, {
 			headers: {
 				token: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken,
 			},
 		});
-		dispatch(getMoviesSuccess(res.data));
+		return res.data;
+		// dispatch(getMoviesSuccess(res.data));
 	} catch (err) {
-		dispatch(getMoviesFailure());
+		return err;
+	}
+};
+
+// CREATE A MOVIE
+export const createMovie = async (dispatch, movie) => {
+	dispatch(createMovieStart());
+	try {
+		const res = await axios.post('/movies', movie, {
+			headers: {
+				token: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken,
+			},
+		});
+		dispatch(createMovieSuccess(res.data));
+	} catch (err) {
+		dispatch(createMovieFailure());
 	}
 };
 

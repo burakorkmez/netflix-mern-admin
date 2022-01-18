@@ -42,3 +42,7 @@
 	margin-left: 20px;
 	align-self: center;
 }
+.addMovieButton.disabled {
+	color: white;
+	background-color: gray;
+}
