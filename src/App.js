@@ -50,7 +50,7 @@ function App() {
 							{user && <ProductList />}
 							{!user && <Redirect to="/login" />}
 						</Route>
-						<Route path="/product/:productId">
+						<Route path="/product/:movieId">
 							{user && <Product />}
 							{!user && <Redirect to="/login" />}
 						</Route>
