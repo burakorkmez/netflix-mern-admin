@@ -6,7 +6,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import UserList from './pages/userList/UserList';
 import User from './pages/user/User';
 import NewUser from './pages/newUser/NewUser';
-import ProductList from './pages/productList/ProductList';
+import MovieList from './pages/movieList/MovieList';
 import Movie from './pages/movie/Movie';
 import NewMovie from './pages/newMovie/NewMovie';
 import Login from './pages/login/Login';
@@ -14,6 +14,7 @@ import { useContext } from 'react';
 import { AuthContext } from './context/authContext/AuthContext';
 import ListofList from './pages/listofList/ListofList';
 import List from './pages/list/List';
+import NewList from './pages/newList/NewList';
 
 function App() {
 	const {
@@ -49,7 +50,7 @@ function App() {
 							{!user && <Redirect to="/login" />}
 						</Route>
 						<Route path="/movies">
-							{user && <ProductList />}
+							{user && <MovieList />}
 							{!user && <Redirect to="/login" />}
 						</Route>
 						<Route path="/product/:movieId">
@@ -67,6 +68,10 @@ function App() {
 						</Route>
 						<Route path="/lists/:listId">
 							{user && <List />}
+							{!user && <Redirect to="/login" />}
+						</Route>
+						<Route path="/newlist">
+							{user && <NewList />}
 							{!user && <Redirect to="/login" />}
 						</Route>
 					</div>
