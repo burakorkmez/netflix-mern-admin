@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { axiosInstance } from '../../config';
 import {
 	createMovieFailure,
 	createMovieStart,
@@ -15,7 +15,7 @@ import {
 export const getMovies = async (dispatch) => {
 	dispatch(getMoviesStart());
 	try {
-		const res = await axios.get('/movies', {
+		const res = await axiosInstance.get('/movies', {
 			headers: {
 				token: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken,
 			},
@@ -30,7 +30,7 @@ export const getMovies = async (dispatch) => {
 export const getMovie = async (id) => {
 	// dispatch(getMoviesStart());
 	try {
-		const res = await axios.get('/movies/find/' + id, {
+		const res = await axiosInstance.get('/movies/find/' + id, {
 			headers: {
 				token: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken,
 			},
@@ -46,7 +46,7 @@ export const getMovie = async (id) => {
 export const createMovie = async (dispatch, movie) => {
 	dispatch(createMovieStart());
 	try {
-		const res = await axios.post('/movies', movie, {
+		const res = await axiosInstance.post('/movies', movie, {
 			headers: {
 				token: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken,
 			},
@@ -61,7 +61,7 @@ export const createMovie = async (dispatch, movie) => {
 export const deleteMovie = async (dispatch, id) => {
 	dispatch(deleteMovieStart());
 	try {
-		await axios.delete('/movies/' + id, {
+		await axiosInstance.delete('/movies/' + id, {
 			headers: {
 				token: 'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken,
 			},

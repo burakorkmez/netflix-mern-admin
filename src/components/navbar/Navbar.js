@@ -7,16 +7,12 @@ import {
 	ExitToApp,
 } from '@material-ui/icons';
 import { AuthContext } from '../../context/authContext/AuthContext';
-import { useHistory } from 'react-router-dom';
 
 export default function Topbar() {
 	const { dispatch } = useContext(AuthContext);
 
-	let history = useHistory();
-
 	const handleLogout = () => {
 		dispatch({ type: 'LOGOUT' });
-		// history.push('/login');
 	};
 
 	return (

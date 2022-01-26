@@ -4,7 +4,7 @@ import './home.css';
 import WidgetSm from '../../components/widgetSm/WidgetSm';
 import WidgetLg from '../../components/widgetLg/WidgetLg';
 import { useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
+import { axiosInstance } from '../../config';
 
 export default function Home() {
 	const MONTHS = useMemo(
@@ -28,10 +28,10 @@ export default function Home() {
 	useEffect(() => {
 		const getStats = async () => {
 			try {
-				const res = await axios.get('/users/stats', {
+				const res = await axiosInstance.get('/users/stats', {
 					headers: {
 						token:
-							'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZTQ0MGYxN2ZmMzk5MzM3Yzk1M2UyZCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY0MjQyOTkyMSwiZXhwIjoxNjQyODYxOTIxfQ.fdgpR5Kr3gVbJ2zT0JLnaj36XefAD2UwgKkMPgBkw2s',
+							'Bearer ' + JSON.parse(localStorage.getItem('user')).accessToken,
 					},
 				});
 				const sortedRes = await res.data.sort(function (a, b) {
