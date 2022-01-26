@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from 'react';
 import { getMovies } from '../../context/movieContext/apiCalls';
 import { MovieContext } from '../../context/movieContext/MovieContext';
 import { ListContext } from '../../context/listContext/ListContext';
+import { createList } from '../../context/listContext/apiCalls';
+import { useHistory } from 'react-router-dom';
 
 export default function NewList() {
 	const [list, setList] = useState(null);
@@ -13,8 +15,11 @@ export default function NewList() {
 		state: { movies },
 	} = useContext(MovieContext);
 
+	const history = useHistory();
+
 	const handleChange = (e) => {
 		const value = e.target.value;
+
 		setList((prev) => ({ ...prev, [e.target.name]: value }));
 	};
 
@@ -25,6 +30,10 @@ export default function NewList() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		(async () => {
+			const res = await createList(dispatch, list);
+			if (res.status === 201) history.push('/lists');
+		})();
 	};
 
 	useEffect(() => {
@@ -42,8 +51,8 @@ export default function NewList() {
 						<input
 							type="text"
 							onChange={handleChange}
-							placeholder="John Wick"
-							name="Title"
+							placeholder="Popular Movies"
+							name="title"
 						/>
 					</div>
 					<div className="addListItem">
@@ -51,14 +60,14 @@ export default function NewList() {
 						<input
 							type="text"
 							onChange={handleChange}
-							placeholder="Genre"
+							placeholder="Action"
 							name="genre"
 						/>
 					</div>
 					<div className="addListItem">
 						<label>Type</label>
 						<select name="type" onChange={handleChange}>
-							<option disabled>Type</option>
+							<option>Type</option>
 							<option value="movie">Movie</option>
 							<option value="series">Series</option>
 						</select>
